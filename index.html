@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#222" />
+    <link rel="manifest" href="./manifest.json">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="animate.css" >
     <script src="https://kit.fontawesome.com/1d874cc34d.js" crossorigin="anonymous"></script>
     <title>Emba Web</title>
     <style>
@@ -39,7 +39,25 @@
       .bg-none {
         background-color: transparent !important;
       }
+      .hidden {
+        display: none !important;
+      }
 
+      #installContainer {
+        position: absolute;
+        bottom: 1em;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+
+      #installContainer button {
+        background-color: inherit;
+        border: 1px solid white;
+        color: white;
+        font-size: 1em;
+        padding: 0.75em;
+      }
     </style>
 </head>
 <body>
@@ -132,8 +150,11 @@
 </div>
 <!--MACCHINA END-->
      
-
-
+<div id="installContainer" class="hidden">
+  <button id="buttonInstall" type="button">
+    Install
+  </button>
+</div>
     </div>
    
 <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
@@ -198,6 +219,46 @@
       
     }
     
+    window.addEventListener('load', e => {
+      registerSW(); 
+    });
+    async function registerSW() { 
+      if ('serviceWorker' in navigator) { 
+        try {
+          await navigator.serviceWorker.register('./sw.js'); 
+        } catch (e) {
+          alert('ServiceWorker registration failed. Sorry about that.'); 
+        }
+      } else {
+        document.querySelector('.alert').removeAttribute('hidden'); 
+      }
+    }
+
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent the mini-infobar from appearing on mobile
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      deferredPrompt = e;
+      // Update UI notify the user they can install the PWA
+      showInstallPromotion();
+    });
+
+    buttonInstall.addEventListener('click', (e) => {
+      // Hide the app provided install promotion
+      hideMyInstallPromotion();
+      // Show the install prompt
+      deferredPrompt.prompt();
+      // Wait for the user to respond to the prompt
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the install prompt');
+        } else {
+          console.log('User dismissed the install prompt');
+        }
+      })
+    });
 </script>
 </body>
 </html>
