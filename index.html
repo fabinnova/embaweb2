@@ -8,63 +8,39 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/1d874cc34d.js" crossorigin="anonymous"></script>
-    <title>Emba Web</title>
-    <style>
-      html,body {
-        height: 100vh;
-      }
-
-      .h-33 {
-        height: 33%!important;
-      }
-
-      .cartTitle {
-        font-size: 1.8em;
-        font-weight: bold;
-      }
-      .cardValueLegend {
-        font-size: 1em;
-        font-weight: bold;
-      }
-      .cardValue {
-        font-size: 1em;
-        font-weight: bold;
-      }
-
-      .cardValueLegendSmall {
-        font-size: 0.9em;
-        font-weight: lighter;
-      }
-
-      .bg-none {
-        background-color: transparent !important;
-      }
-      .hidden {
-        display: none !important;
-      }
-
-      #installContainer {
-        position: absolute;
-        bottom: 0;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        background-color: rgb(0, 0, 255, 0.1);
-      }
-
-      #installContainer button {
-        background-color: rgb(0,0,0,0);
-        border: none;
-        color: black;
-        font-size: 1em;
-        padding: 0.75em;
-        font-weight: bold;
-      }
-    </style>
+    <title>01</title>
+    <link rel="stylesheet" href='./main.css'>
 </head>
 <body>
    
     <div class="container-fluid h-100">
+
+      
+<!--MACCHINA START-->
+ <div class="row p-3">
+  <div class="col-12 d-flex ">
+    <div class="justify-content-center align-self-center mx-auto">
+      <div class="row mt-2">
+        <div class="col-12 cartTitle bg-light text-center" >ONDULATORE</div>
+      </div>
+      <div class="row mt-3 no-gutters">
+        <div class="col-10 row no-gutters">
+          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Produz. (m)</div><div class="col-6 cardValue text-center" id="Ondu1Prod"></div></div>
+          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Vm (m/min)</div><div class="col-6 cardValue text-center" id="Ondu1AvgSpeed"></div></div>
+          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">V (m/min)</div><div class="col-6 cardValue text-center" id="Ondu1Speed"></div></div>
+          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Fermo (min)</div><div class="col-6 cardValue text-center text-danger" id="Ondu1Fermo"></div></div>
+        </div>
+        <div class="col-2 d-flex text-center row no-gutters">
+          <div class="col-12 bg-none" id="Ondu1ProduzioneOk">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--MACCHINA END-->
+
  <!--MACCHINA START-->
  <div class="row p-3">
   <div class="col-12 d-flex ">
@@ -156,6 +132,8 @@
     </div>
 
     <div id="installContainer" class="hidden" >
+      
+      <a class="close" id="buttonClose" ></a>
       <button id="buttonInstall" type="button">
         Aggiungi a schermata Home
       </button>
@@ -174,6 +152,7 @@
     appId: "1:342536773221:web:eb12ff5ec0b664d425308c"
     };
     firebase.initializeApp(firebaseConfig);
+  
     // Get a reference to the database service
     var database = firebase.database();
     var embas = [ ['4',  6600], ['5', 4000], ['6', 6000] ];
@@ -184,6 +163,14 @@
           handleEmba(e[0], e[1], data);
       });
     });
+    
+    var ondu = firebase.database().ref('Ondu/Ondu1');
+    ondu.on('value', function(snapshot) {
+        var data = snapshot.val();
+        handleOndu(data);
+    });
+
+
     var qtaCommessaAttualeLast = {}
     function handleEmba(embaId, embaMqhTH, embaData) {
       
@@ -222,6 +209,48 @@
       qtaCommessaAttualeLast[embaId] = embaData.qtaCommessaAttuale;
       
     }
+
+    var onduTotaleProdLast = -1;
+    const speedLevels = [200, 240];
+    function handleOndu(data) {
+
+      if(data!=undefined && data.speed!=undefined
+      && data.avgSpeed != undefined && data.stop!=undefined
+       && data.meters != undefined) {
+
+         document.getElementById(`Ondu1Speed`).innerHTML = data.speed;
+         // document.getElementById(`Ondu1AvgSpeed`).innerHTML = data.avgSpeed;
+         document.getElementById(`Ondu1Fermo`).innerHTML = data.stop;
+         document.getElementById(`Ondu1Prod`).innerHTML = data.meters;
+   
+         var avgSp =  document.getElementById(`Ondu1AvgSpeed`);
+         
+         if( data.avgSpeed >= speedLevels[1] ) {
+           avgSp.classList.remove('text-warning');
+           avgSp.classList.remove('text-danger');
+           avgSp.classList.add('text-success');
+         } else if(data.avgSpeed >= speedLevels[0]) {
+           avgSp.classList.remove('text-success');
+           avgSp.classList.remove('text-danger');
+           avgSp.classList.add('text-warning');
+         } else {
+           avgSp.classList.remove('text-success');
+           avgSp.classList.remove('text-warning');
+           avgSp.classList.add('text-danger');
+         }
+   
+         avgSp.innerHTML = data.avgSpeed;
+   
+         if( data.meters > onduTotaleProdLast ) {
+           document.getElementById(`Ondu1ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-success"></i>';
+         } else {
+           document.getElementById(`Ondu1ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-danger"></i>';
+         }
+         onduTotaleProdLast = data.meters;
+
+       }
+       
+    }
     
     window.addEventListener('load', e => {
       registerSW(); 
@@ -245,7 +274,6 @@
       e.preventDefault();
       // Stash the event so it can be triggered later.
       deferredPrompt = e;
-      deferredPrompt.prompt();
       // Update UI notify the user they can install the PWA
       showInstallPromotion();
     });
@@ -272,6 +300,10 @@
     function hideMyInstallPromotion() {
       installContainer.classList.add('hidden');
     }
+
+    buttonClose.addEventListener('click', (e) => {
+      installContainer.classList.add('hidden');
+    });
 </script>
 </body>
 </html>
