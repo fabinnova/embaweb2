@@ -45,18 +45,20 @@
 
       #installContainer {
         position: absolute;
-        bottom: 1em;
+        bottom: 0;
         display: flex;
         justify-content: center;
         width: 100%;
+        background-color: rgb(0, 0, 255, 0.1);
       }
 
       #installContainer button {
-        background-color: inherit;
-        border: 1px solid white;
-        color: white;
+        background-color: rgb(0,0,0,0);
+        border: none;
+        color: black;
         font-size: 1em;
         padding: 0.75em;
+        font-weight: bold;
       }
     </style>
 </head>
@@ -149,12 +151,14 @@
   </div>
 </div>
 <!--MACCHINA END-->
-     
-<div id="installContainer" class="hidden">
-  <button id="buttonInstall" type="button">
-    Install
-  </button>
-</div>
+ 
+
+    </div>
+
+    <div id="installContainer" class="hidden" >
+      <button id="buttonInstall" type="button">
+        Aggiungi a schermata Home
+      </button>
     </div>
    
 <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
@@ -241,6 +245,7 @@
       e.preventDefault();
       // Stash the event so it can be triggered later.
       deferredPrompt = e;
+      deferredPrompt.prompt();
       // Update UI notify the user they can install the PWA
       showInstallPromotion();
     });
@@ -248,6 +253,7 @@
     buttonInstall.addEventListener('click', (e) => {
       // Hide the app provided install promotion
       hideMyInstallPromotion();
+      
       // Show the install prompt
       deferredPrompt.prompt();
       // Wait for the user to respond to the prompt
@@ -259,6 +265,13 @@
         }
       })
     });
+
+    function showInstallPromotion() {
+      installContainer.classList.remove('hidden');
+    }
+    function hideMyInstallPromotion() {
+      installContainer.classList.add('hidden');
+    }
 </script>
 </body>
 </html>
