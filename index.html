@@ -264,7 +264,7 @@
     async function registerSW() { 
       if ('serviceWorker' in navigator) { 
         try {
-          await navigator.serviceWorker.register('./sw.js'); 
+          await navigator.serviceWorker.register('./OneSignalSDKWorker.js'); 
         } catch (e) {
           alert('ServiceWorker registration failed. Sorry about that.'); 
         }
@@ -325,5 +325,20 @@
 
 
 </script>
+
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  var OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "e6df6f84-6d8d-4709-8308-5c58e2e2aac7",
+      notifyButton: {
+        enable: true,
+      },
+    });
+  });
+</script>
+
+
 </body>
 </html>
