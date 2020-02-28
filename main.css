@@ -46,7 +46,7 @@ html,body {
     background-color: rgba(0,0,0,0);
     border: none;
     color: #ADEFD1FF;
-    font-size: 1.4em;
+    font-size: 1.1em;
     padding: 1.75em;
     font-weight: bold;
   }
@@ -54,10 +54,10 @@ html,body {
 
   .close {
 position: absolute;
-left: 32px;
-top: 39px;
-width: 32px;
-height: 32px;
+left: 12px;
+top: 38px;
+width: 7px;
+height: 7px;
 opacity: 0.3;
 }
 .close:hover {
@@ -65,9 +65,9 @@ opacity: 1;
 }
 .close:before, .close:after {
 position: absolute;
-left: 15px;
+left: 12px;
 content: ' ';
-height: 33px;
+height: 15px;
 width: 2px;
 background-color: rgb(218, 214, 214);
 }

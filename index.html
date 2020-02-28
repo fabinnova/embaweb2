@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#222" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/icons/apple-touch-icon.png">
+    <link rel="mask-icon" href="./img/icons/safari-pinned-tab.svg" color="#5bbad5">
+    
     <link rel="manifest" href="./manifest.json">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/1d874cc34d.js" crossorigin="anonymous"></script>
-    <title>01</title>
+    <title>Innova</title>
     <link rel="stylesheet" href='./main.css'>
 </head>
 <body>
@@ -143,13 +149,13 @@
 <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
 <script>
     var firebaseConfig = {
-    apiKey: "AIzaSyCZky8lzCTdXM6qBauiRfQ41zrZ3EPNiaQ",
-    authDomain: "embaweb-c4ec8.firebaseapp.com",
-    databaseURL: "https://embaweb-c4ec8.firebaseio.com",
-    projectId: "embaweb-c4ec8",
-    storageBucket: "embaweb-c4ec8.appspot.com",
-    messagingSenderId: "342536773221",
-    appId: "1:342536773221:web:eb12ff5ec0b664d425308c"
+      apiKey: "AIzaSyCZky8lzCTdXM6qBauiRfQ41zrZ3EPNiaQ",
+      authDomain: "embaweb-c4ec8.firebaseapp.com",
+      databaseURL: "https://embaweb-c4ec8.firebaseio.com",
+      projectId: "embaweb-c4ec8",
+      storageBucket: "embaweb-c4ec8.appspot.com",
+      messagingSenderId: "342536773221",
+      appId: "1:342536773221:web:eb12ff5ec0b664d425308c"
     };
     firebase.initializeApp(firebaseConfig);
   
@@ -304,6 +310,20 @@
     buttonClose.addEventListener('click', (e) => {
       installContainer.classList.add('hidden');
     });
+
+    // const isIos = () => {
+    //   const userAgent = window.navigator.userAgent.toLowerCase();
+    //   return /iphone|ipad|ipod/.test( userAgent );
+    // }
+    // // Detects if device is in standalone mode
+    // const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+    // // Checks if should display install popup notification:
+    // if (isIos() && !isInStandaloneMode()) {
+    //   console.log('ios');
+    // }
+
+
 </script>
 </body>
 </html>
