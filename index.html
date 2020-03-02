@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#222" />
-
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    
     <link rel="apple-touch-icon" sizes="180x180" href="./img/icons/apple-touch-icon.png">
     <link rel="mask-icon" href="./img/icons/safari-pinned-tab.svg" color="#5bbad5">
-    
     <link rel="manifest" href="./manifest.json">
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -18,132 +15,200 @@
     <link rel="stylesheet" href='./main.css'>
 </head>
 <body>
-   
-    <div class="container-fluid h-100">
+   <div class="completeCenter" id="centralSpinner">
+    <div class="spinner-border"></div>
+   </div>
 
-      
-<!--MACCHINA START-->
- <div class="row p-3">
-  <div class="col-12 d-flex ">
-    <div class="justify-content-center align-self-center mx-auto">
-      <div class="row mt-2">
-        <div class="col-12 cartTitle bg-light text-center" >ONDULATORE</div>
-      </div>
-      <div class="row mt-3 no-gutters">
-        <div class="col-10 row no-gutters">
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Produz. (m)</div><div class="col-6 cardValue text-center" id="Ondu1Prod"></div></div>
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Vm (m/min)</div><div class="col-6 cardValue text-center" id="Ondu1AvgSpeed"></div></div>
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">V (m/min)</div><div class="col-6 cardValue text-center" id="Ondu1Speed"></div></div>
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Fermo (min)</div><div class="col-6 cardValue text-center text-danger" id="Ondu1Fermo"></div></div>
-        </div>
-        <div class="col-2 d-flex text-center row no-gutters">
-          <div class="col-12 bg-none" id="Ondu1ProduzioneOk">
-            
+  <div class="container hidden" id="mainContainer">
+    <!--MACCHINA START-->
+        <div class="row">
+          <div class="col-12 p-0">
+            <div class="text-center bg-secondary text-light m-1 p-3 cartTitle">ONDULATORE</div>  
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!--MACCHINA END-->
-
- <!--MACCHINA START-->
- <div class="row p-3">
-  <div class="col-12 d-flex ">
-    <div class="justify-content-center align-self-center  mx-auto">
-      <small class="text-light" style="position:absolute;z-index:100;">6</small>
-      <div class="row mt-2">
-        <div class="col-12 cartTitle bg-light text-center" id="emba6Title"></div>
-      </div>
-      <div class="row mt-3 no-gutters">
-        <div class="col-10 row no-gutters">
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Mq Tot.</div><div class="col-6 cardValue text-center" id="emba6MqTot"></div></div>
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Mq/h</div><div class="col-6 cardValue text-center" id="emba6MqH"></div></div>
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Fermo Tot.</div><div class="col-6 cardValue text-center text-danger" id="emba6FermoTot"></div></div>
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Fermo Comm.</div><div class="col-6 cardValue text-center text-danger" id="emba6FermoCom"></div></div>
-          <div class="col-12 row no-gutters  mt-3"><div class="col-6 cardValueLegendSmall text-left">Ultimo Agg.</div><div class="col-6 cardValueLegendSmall text-center" id="emba6UltimoUp"></div></div>
-        </div>
-        <div class="col-2 d-flex text-center row no-gutters">
-          <div class="col-12 bg-none" id="emba6ProduzioneOk">
-            
+         
+          <div class="col-6 p-0">
+            <div class="text-center bg-light m-1 p-2 row">
+              <div class="col-12 cardValue " id="Ondu1ProduzioneOk"></div>
+            </div>  
           </div>
-          <div class="col-12" id="emba6FermoSetup">
+          <div class="col-6 p-0 ">
+            <div class="text-center bg-light m-1 p-2 row minHeight">
+            </div>  
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!--MACCHINA END-->
-     
-<!--MACCHINA START-->
-<div class="row p-3">
-  <div class="col-12 d-flex ">
-    <div class="justify-content-center align-self-center  mx-auto">
-      <small class="text-light" style="position:absolute;z-index:100;">5</small>
-      <div class="row mt-2">
-        <div class="col-12 cartTitle bg-light text-center" id="emba5Title"></div>
-      </div>
-      <div class="row mt-3 no-gutters">
-        <div class="col-10 row no-gutters">
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Mq Tot.</div><div class="col-6 cardValue text-center" id="emba5MqTot"></div></div>
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Mq/h</div><div class="col-6 cardValue text-center" id="emba5MqH"></div></div>
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Fermo Tot.</div><div class="col-6 cardValue text-center text-danger" id="emba5FermoTot"></div></div>
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Fermo Comm.</div><div class="col-6 cardValue text-center text-danger" id="emba5FermoCom"></div></div>
-          <div class="col-12 row no-gutters  mt-3"><div class="col-6 cardValueLegendSmall text-left">Ultimo Agg.</div><div class="col-6 cardValueLegendSmall text-center" id="emba5UltimoUp"></div></div>
-        </div>
-        <div class="col-2 d-flex text-center row no-gutters">
-          <div class="col-12 bg-none" id="emba5ProduzioneOk">
-            
+          <div class="col-6 p-0">
+            <div class="text-center bg-light m-1 p-2 row">
+              <div class="col-12 cardValue " id="Ondu1Speed"></div>
+              <div class="col-12 cardValueLegendSmall">V (m/min)</div>
+            </div>  
           </div>
-          <div class="col-12" id="emba5FermoSetup">
+          <div class="col-6 p-0">
+            <div class="text-center bg-light m-1 p-2 row">
+              <div class="col-12 cardValue " id="Ondu1AvgSpeed"></div>
+              <div class="col-12 cardValueLegendSmall">Vm (m/min)</div>
+            </div>  
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!--MACCHINA END-->
-
-<!--MACCHINA START-->
-<div class="row p-3">
-  <div class="col-12 d-flex ">
-    <div class="justify-content-center align-self-center  mx-auto">
-      <small class="text-light" style="position:absolute;z-index:100;">5</small>
-      <div class="row mt-2">
-        <div class="col-12 cartTitle bg-light text-center" id="emba4Title"></div>
-      </div>
-      <div class="row mt-3 no-gutters">
-        <div class="col-10 row no-gutters">
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Mq Tot.</div><div class="col-6 cardValue text-center" id="emba4MqTot"></div></div>
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Mq/h</div><div class="col-6 cardValue text-center" id="emba4MqH"></div></div>
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Fermo Tot.</div><div class="col-6 cardValue text-center text-danger" id="emba4FermoTot"></div></div>
-          <div class="col-12 row no-gutters "><div class="col-6 cardValueLegend text-secondary text-left">Fermo Comm.</div><div class="col-6 cardValue text-center text-danger" id="emba4FermoCom"></div></div>
-          <div class="col-12 row no-gutters  mt-3"><div class="col-6 cardValueLegendSmall text-left">Ultimo Agg.</div><div class="col-6 cardValueLegendSmall text-center" id="emba4UltimoUp"></div></div>
-        </div>
-        <div class="col-2 d-flex text-center row no-gutters">
-          <div class="col-12 bg-none" id="emba4ProduzioneOk">
-            
+          <div class="col-6 p-0">
+            <div class="text-center bg-light m-1 p-2 row">
+              <div class="col-12 cardValue" id="Ondu1Prod"></div>
+              <div class="col-12 cardValueLegendSmall">Produzione (m)</div>
+            </div>  
           </div>
-          <div class="col-12" id="emba4FermoSetup">
+          <div class="col-6 p-0">
+            <div class="text-center bg-light m-1 p-2 row">
+              <div class="col-12 cardValue text-danger" id="Ondu1Fermo"></div>
+              <div class="col-12 cardValueLegendSmall">Fermo (min)</div>
+            </div>  
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!--MACCHINA END-->
  
+        </div>
+    <!--MACCHINA END-->
+    <!--MACCHINA START-->
+        <div class="row mt-3">
+          <div class="col-12 p-0">
+            <div class="text-center bg-secondary text-light m-1 p-3 cartTitle" id="emba6Title"></div>  
+          </div>
+          <div class="col-6 p-0">
+            <div class="text-center bg-light m-1 p-2 row">
+              <div class="col-12 cardValue " id="emba6ProduzioneOk"></div>
+            </div>  
+          </div>
+          <div class="col-6 p-0 ">
+            <div class="text-center bg-light m-1 p-2 row minHeight">
+              <div class="col-12 cardValue " id="emba6FermoSetup"></div>
+            </div>  
+          </div>
+          <div class="col-6 p-0">
+            <div class="text-center bg-light m-1 p-2 row">
+              <div class="col-12 cardValue" id="emba6MqTot"></div>
+              <div class="col-12 cardValueLegendSmall">Mq Tot.</div>
+            </div>  
+          </div>
+          <div class="col-6 p-0">
+            <div class="text-center bg-light m-1 p-2 row">
+              <div class="col-12 cardValue " id="emba6MqH"></div>
+              <div class="col-12 cardValueLegendSmall">Mq/h</div>
+            </div>  
+          </div>
+          <div class="col-6 p-0">
+            <div class="text-center bg-light m-1 p-2 row">
+              <div class="col-12 cardValue text-danger" id="emba6FermoTot"></div>
+              <div class="col-12 cardValueLegendSmall">Fermo Tot.</div>
+            </div>  
+          </div>
+          <div class="col-6 p-0">
+            <div class="text-center bg-light m-1 p-2 row">
+              <div class="col-12 cardValue text-danger" id="emba6FermoCom"></div>
+              <div class="col-12 cardValueLegendSmall">Fermo Comm.</div>
+            </div>  
+          </div>
+          <div class="col-12 p-0">
+            <div class="text-center bg-light text-black m-1 p-0 cardValueLegendSmall" id="emba6UltimoUp"></div>  
+          </div>
+        </div>
+    <!--MACCHINA END-->
 
+    <!--MACCHINA START-->
+    <div class="row mt-3">
+      <div class="col-12 p-0">
+        <div class="text-center bg-secondary text-light m-1 p-3 cartTitle" id="emba5Title"></div>  
+      </div>
+      <div class="col-6 p-0">
+        <div class="text-center bg-light m-1 p-2 row">
+          <div class="col-12 cardValue " id="emba5ProduzioneOk"></div>
+        </div>  
+      </div>
+      <div class="col-6 p-0 ">
+        <div class="text-center bg-light m-1 p-2 row minHeight">
+          <div class="col-12 cardValue " id="emba5FermoSetup"></div>
+        </div>  
+      </div>
+      <div class="col-6 p-0">
+        <div class="text-center bg-light m-1 p-2 row">
+          <div class="col-12 cardValue" id="emba5MqTot"></div>
+          <div class="col-12 cardValueLegendSmall">Mq Tot.</div>
+        </div>  
+      </div>
+      <div class="col-6 p-0">
+        <div class="text-center bg-light m-1 p-2 row">
+          <div class="col-12 cardValue " id="emba5MqH"></div>
+          <div class="col-12 cardValueLegendSmall">Mq/h</div>
+        </div>  
+      </div>
+      <div class="col-6 p-0">
+        <div class="text-center bg-light m-1 p-2 row">
+          <div class="col-12 cardValue text-danger" id="emba5FermoTot"></div>
+          <div class="col-12 cardValueLegendSmall">Fermo Tot.</div>
+        </div>  
+      </div>
+      <div class="col-6 p-0">
+        <div class="text-center bg-light m-1 p-2 row">
+          <div class="col-12 cardValue text-danger" id="emba5FermoCom"></div>
+          <div class="col-12 cardValueLegendSmall">Fermo Comm.</div>
+        </div>  
+      </div>
+      <div class="col-12 p-0">
+        <div class="text-center bg-light text-black m-1 p-0 cardValueLegendSmall" id="emba5UltimoUp"></div>  
+      </div>
     </div>
+<!--MACCHINA END-->
 
-    <div id="installContainer" class="hidden" >
-      
-      <a class="close" id="buttonClose" ></a>
-      <button id="buttonInstall" type="button">
-        Aggiungi a schermata Home
-      </button>
+
+    <!--MACCHINA START-->
+    <div class="row mt-3">
+      <div class="col-12 p-0">
+        <div class="text-center bg-secondary text-light m-1 p-3 cartTitle" id="emba4Title"></div>  
+      </div>
+      <div class="col-6 p-0">
+        <div class="text-center bg-light m-1 p-2 row">
+          <div class="col-12 cardValue " id="emba4ProduzioneOk"></div>
+        </div>  
+      </div>
+      <div class="col-6 p-0 ">
+        <div class="text-center bg-light m-1 p-2 row minHeight">
+          <div class="col-12 cardValue " id="emba4FermoSetup"></div>
+        </div>  
+      </div>
+      <div class="col-6 p-0">
+        <div class="text-center bg-light m-1 p-2 row">
+          <div class="col-12 cardValue" id="emba4MqTot"></div>
+          <div class="col-12 cardValueLegendSmall">Mq Tot.</div>
+        </div>  
+      </div>
+      <div class="col-6 p-0">
+        <div class="text-center bg-light m-1 p-2 row">
+          <div class="col-12 cardValue " id="emba4MqH"></div>
+          <div class="col-12 cardValueLegendSmall">Mq/h</div>
+        </div>  
+      </div>
+      <div class="col-6 p-0">
+        <div class="text-center bg-light m-1 p-2 row">
+          <div class="col-12 cardValue text-danger" id="emba4FermoTot"></div>
+          <div class="col-12 cardValueLegendSmall">Fermo Tot.</div>
+        </div>  
+      </div>
+      <div class="col-6 p-0">
+        <div class="text-center bg-light m-1 p-2 row">
+          <div class="col-12 cardValue text-danger" id="emba4FermoCom"></div>
+          <div class="col-12 cardValueLegendSmall">Fermo Comm.</div>
+        </div>  
+      </div>
+      <div class="col-12 p-0">
+        <div class="text-center bg-light text-black m-1 p-0 cardValueLegendSmall" id="emba4UltimoUp"></div>  
+      </div>
     </div>
+<!--MACCHINA END-->
+
+<div class="py-1"></div>
+
+<div id="installContainer" class="hidden" >
+  
+  <a class="close" id="buttonClose" ></a>
+  <button id="buttonInstall" type="button">
+    Aggiungi a schermata Home
+  </button>
+</div>
+</div>
+
    
 <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-database.js"></script>
@@ -181,7 +246,7 @@
     function handleEmba(embaId, embaMqhTH, embaData) {
       
       document.getElementById(`emba${embaId}Title`).innerHTML = embaData.risorsa;
-      document.getElementById(`emba${embaId}MqTot`).innerHTML = embaData.mqProdottiDaInizioTurno;
+      document.getElementById(`emba${embaId}MqTot`).innerHTML = numberWithCommas(embaData.mqProdottiDaInizioTurno);
       document.getElementById(`emba${embaId}FermoTot`).innerHTML = embaData.minutiFermoDaInizioTurno;
       document.getElementById(`emba${embaId}FermoCom`).innerHTML = embaData.minutiFermoCommessaAttuale;
       document.getElementById(`emba${embaId}UltimoUp`).innerHTML = (new Date(embaData.instant)).toLocaleTimeString();
@@ -194,14 +259,14 @@
         mqtH.classList.remove('text-success');
         mqtH.classList.add('text-danger');
       }
-      mqtH.innerHTML = embaData.mqOraDaInizioTurno;
+      mqtH.innerHTML = numberWithCommas(embaData.mqOraDaInizioTurno);
       
       var embaFermoSetup = document.getElementById(`emba${embaId}FermoSetup`);
       
       if(embaData.inSetup) {
-        embaFermoSetup.innerHTML = '<i class="col-12 fas fa-cog fa-3x text-warning"></i>';
+        embaFermoSetup.innerHTML = '<i class="col-12 fas fa-cog fa-lg text-warning"></i>';
       } else if(embaData.inFermo) {
-        embaFermoSetup.innerHTML = '<i class="fas fa-exclamation-triangle fa-3x text-danger"></i>';
+        embaFermoSetup.innerHTML = '<i class="fas fa-exclamation-triangle fa-lg text-danger"></i>';
       } else {
         embaFermoSetup.innerHTML = "";
       }
@@ -227,7 +292,7 @@
          document.getElementById(`Ondu1Speed`).innerHTML = data.speed;
          // document.getElementById(`Ondu1AvgSpeed`).innerHTML = data.avgSpeed;
          document.getElementById(`Ondu1Fermo`).innerHTML = data.stop;
-         document.getElementById(`Ondu1Prod`).innerHTML = data.meters;
+         document.getElementById(`Ondu1Prod`).innerHTML = numberWithCommas(data.meters);
    
          var avgSp =  document.getElementById(`Ondu1AvgSpeed`);
          
@@ -322,8 +387,14 @@
     // if (isIos() && !isInStandaloneMode()) {
     //   console.log('ios');
     // }
-
-
+    function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+    setTimeout(() => {
+      centralSpinner.classList.add('hidden');
+      mainContainer.classList.remove('hidden');
+    }, 2000);
 </script>
 </body>
 </html>

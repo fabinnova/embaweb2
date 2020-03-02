@@ -2,12 +2,15 @@ html,body {
     height: 100vh;
   }
 
+  .minHeight {
+    min-height: 59px;
+  }
   .h-33 {
     height: 33%!important;
   }
 
   .cartTitle {
-    font-size: 1.8em;
+    font-size: 2em;
     font-weight: bold;
   }
   .cardValueLegend {
@@ -15,12 +18,12 @@ html,body {
     font-weight: bold;
   }
   .cardValue {
-    font-size: 1em;
+    font-size: 1.8em;
     font-weight: bold;
   }
 
   .cardValueLegendSmall {
-    font-size: 0.9em;
+    font-size: 1em;
     font-weight: lighter;
   }
 
@@ -53,27 +56,34 @@ html,body {
 
 
   .close {
-position: absolute;
-left: 12px;
-top: 38px;
-width: 7px;
-height: 7px;
-opacity: 0.3;
-}
-.close:hover {
-opacity: 1;
-}
-.close:before, .close:after {
-position: absolute;
-left: 12px;
-content: ' ';
-height: 15px;
-width: 2px;
-background-color: rgb(218, 214, 214);
-}
-.close:before {
-transform: rotate(45deg);
-}
-.close:after {
-transform: rotate(-45deg);
-}
+    position: absolute;
+    left: 12px;
+    top: 38px;
+    width: 7px;
+    height: 7px;
+    opacity: 0.3;
+  }
+  .close:hover {
+    opacity: 1;
+  }
+  .close:before, .close:after {
+    position: absolute;
+    left: 12px;
+    content: ' ';
+    height: 15px;
+    width: 2px;
+    background-color: rgb(218, 214, 214);
+  }
+  .close:before {
+    transform: rotate(45deg);
+  }
+  .close:after {
+    transform: rotate(-45deg);
+  }
+
+  .completeCenter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
