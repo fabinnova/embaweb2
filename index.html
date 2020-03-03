@@ -38,7 +38,7 @@
           <div class="col-6 p-0">
             <div class="text-center bg-light m-1 p-2 row">
               <div class="col-12 cardValue" id="Ondu1Prod"></div>
-              <div class="col-12 cardValueLegendSmall">Produzione (m)</div>
+              <div class="col-12 cardValueLegendSmall">Produzione (m/lin)</div>
             </div>  
           </div>
           
@@ -287,6 +287,7 @@
     }
 
     var onduTotaleProdLast = -1;
+    var noGoodTimes = 0;
     const speedLevels = [200, 240];
     function handleOndu(data) {
       if(data!=undefined && data.speed!=undefined
@@ -316,11 +317,16 @@
          }
    
          avgSp.innerHTML = data.avgSpeed;
-   
-         if( data.meters > onduTotaleProdLast ) {
-           document.getElementById(`Ondu1ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-success"></i>';
-         } else {
+         
+
+         if( data.meters == onduTotaleProdLast && noGoodTimes >= 4) {
            document.getElementById(`Ondu1ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-danger"></i>';
+         } else if(data.meters == onduTotaleProdLast) {
+          document.getElementById(`Ondu1ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-success"></i>';
+          noGoodTimes += 1;
+         } else {
+           document.getElementById(`Ondu1ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-success"></i>';
+           noGoodTimes = 0;
          }
          onduTotaleProdLast = data.meters;
 
@@ -393,7 +399,7 @@
     //   console.log('ios');
     // }
     function numberWithCommas(x) {
-      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
     
     setTimeout(() => {
