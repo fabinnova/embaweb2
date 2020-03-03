@@ -37,29 +37,35 @@
           </div>
           <div class="col-6 p-0">
             <div class="text-center bg-light m-1 p-2 row">
-              <div class="col-12 cardValue " id="Ondu1Speed"></div>
-              <div class="col-12 cardValueLegendSmall">V (m/min)</div>
+              <div class="col-12 cardValue" id="Ondu1Prod"></div>
+              <div class="col-12 cardValueLegendSmall">Produzione (m)</div>
             </div>  
           </div>
+          
           <div class="col-6 p-0">
             <div class="text-center bg-light m-1 p-2 row">
               <div class="col-12 cardValue " id="Ondu1AvgSpeed"></div>
               <div class="col-12 cardValueLegendSmall">Vm (m/min)</div>
             </div>  
           </div>
-          <div class="col-6 p-0">
-            <div class="text-center bg-light m-1 p-2 row">
-              <div class="col-12 cardValue" id="Ondu1Prod"></div>
-              <div class="col-12 cardValueLegendSmall">Produzione (m)</div>
-            </div>  
-          </div>
+          
           <div class="col-6 p-0">
             <div class="text-center bg-light m-1 p-2 row">
               <div class="col-12 cardValue text-danger" id="Ondu1Fermo"></div>
               <div class="col-12 cardValueLegendSmall">Fermo (min)</div>
             </div>  
           </div>
- 
+          
+          <div class="col-6 p-0">
+            <div class="text-center bg-light m-1 p-2 row">
+              <div class="col-12 cardValue " id="Ondu1Speed"></div>
+              <div class="col-12 cardValueLegendSmall">V (m/min)</div>
+            </div>  
+          </div>
+
+          <div class="col-12 p-0">
+            <div class="text-center bg-light text-black m-1 p-0 cardValueLegendSmall" id="Ondu1LastUp"></div>  
+          </div>
         </div>
     <!--MACCHINA END-->
     <!--MACCHINA START-->
@@ -241,7 +247,6 @@
         handleOndu(data);
     });
 
-
     var qtaCommessaAttualeLast = {}
     function handleEmba(embaId, embaMqhTH, embaData) {
       
@@ -284,16 +289,16 @@
     var onduTotaleProdLast = -1;
     const speedLevels = [200, 240];
     function handleOndu(data) {
-
       if(data!=undefined && data.speed!=undefined
       && data.avgSpeed != undefined && data.stop!=undefined
        && data.meters != undefined) {
 
-         document.getElementById(`Ondu1Speed`).innerHTML = data.speed;
-         // document.getElementById(`Ondu1AvgSpeed`).innerHTML = data.avgSpeed;
-         document.getElementById(`Ondu1Fermo`).innerHTML = data.stop;
-         document.getElementById(`Ondu1Prod`).innerHTML = numberWithCommas(data.meters);
-   
+          document.getElementById(`Ondu1Speed`).innerHTML = data.speed;
+          // document.getElementById(`Ondu1AvgSpeed`).innerHTML = data.avgSpeed;
+          document.getElementById(`Ondu1Fermo`).innerHTML = data.stop;
+          document.getElementById(`Ondu1Prod`).innerHTML = numberWithCommas(data.meters);
+          document.getElementById('Ondu1LastUp').innerHTML =  (new Date(data.timestamp)).toLocaleTimeString(); 
+
          var avgSp =  document.getElementById(`Ondu1AvgSpeed`);
          
          if( data.avgSpeed >= speedLevels[1] ) {
