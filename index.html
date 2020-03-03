@@ -248,8 +248,9 @@
     });
 
     var qtaCommessaAttualeLast = {}
+    var noGoodTimes = 0;
     function handleEmba(embaId, embaMqhTH, embaData) {
-      
+     
       document.getElementById(`emba${embaId}Title`).innerHTML = embaData.risorsa;
       document.getElementById(`emba${embaId}MqTot`).innerHTML = numberWithCommas(embaData.mqProdottiDaInizioTurno);
       document.getElementById(`emba${embaId}FermoTot`).innerHTML = embaData.minutiFermoDaInizioTurno;
@@ -276,14 +277,25 @@
         embaFermoSetup.innerHTML = "";
       }
       
-      
-      if(  embaData.qtaCommessaAttuale > qtaCommessaAttualeLast[embaId] || (embaData.qtaCommessaAttuale > 0 && qtaCommessaAttualeLast[embaId]==undefined) ) {
-        document.getElementById(`emba${embaId}ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-success"></i>';
+      if(embaId == 6 && !(!embaData.inSetup && embaData.inFermo) ) {
+        if( embaData.qtaCommessaAttuale == qtaCommessaAttualeLast[embaId] && noGoodTimes >= 6) {
+           document.getElementById(`emba${embaId}ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-danger"></i>';
+         } else if(embaData.qtaCommessaAttuale == qtaCommessaAttualeLast[embaId]) {
+          document.getElementById(`emba${embaId}ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-success"></i>';
+          noGoodTimes += 1;
+         } else {
+          document.getElementById(`emba${embaId}ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-success"></i>';
+           noGoodTimes = 0;
+         }
+
       } else {
-        document.getElementById(`emba${embaId}ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-danger"></i>';
+        if(  embaData.qtaCommessaAttuale > qtaCommessaAttualeLast[embaId] || (embaData.qtaCommessaAttuale > 0 && qtaCommessaAttualeLast[embaId]==undefined) ) {
+          document.getElementById(`emba${embaId}ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-success"></i>';
+        } else {
+          document.getElementById(`emba${embaId}ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-danger"></i>';
+        }
       }
       qtaCommessaAttualeLast[embaId] = embaData.qtaCommessaAttuale;
-      
     }
 
     var onduTotaleProdLast = -1;
@@ -319,14 +331,10 @@
          avgSp.innerHTML = data.avgSpeed;
          
 
-         if( data.meters == onduTotaleProdLast && noGoodTimes >= 4) {
+         if( data.speed <= 0) {
            document.getElementById(`Ondu1ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-danger"></i>';
-         } else if(data.meters == onduTotaleProdLast) {
-          document.getElementById(`Ondu1ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-success"></i>';
-          noGoodTimes += 1;
          } else {
            document.getElementById(`Ondu1ProduzioneOk`).innerHTML = '<i class="fas fa-circle fa-lg text-success"></i>';
-           noGoodTimes = 0;
          }
          onduTotaleProdLast = data.meters;
 
